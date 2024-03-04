@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace YourThunderstoreTeam.service;
+namespace DistractedCompany.service;
 
 public class TemplateServiceBaseTest
 {

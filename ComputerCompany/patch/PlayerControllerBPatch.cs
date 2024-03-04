@@ -1,7 +1,7 @@
 ﻿using GameNetcodeStuff;
 using HarmonyLib;
 
-namespace YourThunderstoreTeam.patch;
+namespace DistractedCompany.patch;
 
 /// <summary>
 /// Patch to modify the behavior of a player.
@@ -27,5 +27,5 @@ public class PlayerControllerBPatch
         __instance.isJumping = false;
         return false;
     }
-    
+
 }

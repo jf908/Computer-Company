@@ -21,6 +21,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Template\Template.csproj" />
+        <ProjectReference Include="..\ComputerCompany\ComputerCompany.csproj" />
     </ItemGroup>
 </Project>
