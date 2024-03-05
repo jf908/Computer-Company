@@ -3,6 +3,7 @@ using BepInEx.Logging;
 using HarmonyLib;
 using DistractedCompany.patch;
 using DistractedCompany.service;
+using MoonSharp.Interpreter;
 
 namespace DistractedCompany;
 
@@ -22,11 +23,30 @@ public class Plugin : BaseUnityPlugin
         Instance = this;
     }
 
+    double MoonSharpFactorial()
+    {
+        string script = @"    
+		-- defines a factorial function
+		function fact (n)
+			if (n == 0) then
+				return 1
+			else
+				return n*fact(n - 1)
+			end
+		end
+
+	return fact(5)";
+
+        DynValue res = Script.RunString(script);
+        return res.Number;
+    }
+
     private void Awake()
     {
         Service = new TemplateService();
 
         Log.LogInfo($"Applying patches...");
+        Log.LogInfo($"Applying" + MoonSharpFactorial());
         ApplyPluginPatch();
         Log.LogInfo($"Patches applied");
     }
