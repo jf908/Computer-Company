@@ -54,7 +54,7 @@
         <!-- We can't move the original plugin because it is used by reference for Test project -->
         <Move SourceFiles="$(TargetDir)$(TargetFileName).tmp" DestinationFiles="$(PluginGameDir)$(TargetFileName)"/>
         <!-- Kill every instance of the game, ignore errors if none are running -->
-        <Exec Command='taskkill /F /IM "$(GameExe)" /T || exit 0'/>
+        <Exec Command='taskkill /F /IM "$(GameExe)" /FI "STATUS eq RUNNING"'/>
         <!-- Start new instances of the game as many times as specified in NumberOfClients -->
         <!-- The ping command is used to apply a delay between each instance, otherwise only one BepInEx debug terminal would be opened -->
         <!-- Use ping command is a workaround because Windows doesn't have a sleep command -->
