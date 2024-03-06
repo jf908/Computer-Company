@@ -23,30 +23,66 @@ public class Plugin : BaseUnityPlugin
         Instance = this;
     }
 
-    double MoonSharpFactorial()
-    {
-        string script = @"    
-		-- defines a factorial function
-		function fact (n)
-			if (n == 0) then
-				return 1
-			else
-				return n*fact(n - 1)
-			end
-		end
-
-	return fact(5)";
-
-        DynValue res = Script.RunString(script);
-        return res.Number;
-    }
-
     private void Awake()
     {
         Service = new TemplateService();
 
+        Log.LogInfo($"Registering userdata...");
+        UserData.RegisterAssembly();
+        Log.LogInfo($"UserData registered");
+
         Log.LogInfo($"Applying patches...");
-        Log.LogInfo($"Applying" + MoonSharpFactorial());
+
+        var env = new CCEnv();
+        env.ExecString(@"
+            function assert_available(...)
+                local path = {...}
+                local current = _G
+                for i = 1, select('#', ...) do
+                    local part = select(i, ...)
+                    print(part)
+                    local nxt = current[part]
+                    if not nxt then
+                        error('could not find path part ' .. part .. ' in ' .. table.concat(path, '.'))
+                    end
+                    current = nxt
+                end
+            end
+
+            assert_available('game')
+            assert_available('game', 'players')
+            assert_available('game', 'day')
+            assert_available('game', 'next_company_day')
+            assert_available('game', 'quota_amount')
+            assert_available('game', 'quota_fulfilled_amount')
+            assert_available('game', 'funds')
+            assert_available('ship')
+            assert_available('ship', 'monitor')
+            assert_available('ship', 'monitor', 'view_map')
+            assert_available('ship', 'monitor', 'turn')
+            assert_available('ship', 'monitor', 'switch')
+            assert_available('ship', 'monitor', 'current_player')
+            assert_available('ship', 'monitor', 'players_on_screen')
+            assert_available('ship', 'monitor', 'enemies_on_screen')
+            assert_available('ship', 'console')
+            -- This doesn't yet work? assert_available('ship', 'console', 'commands')
+            assert_available('ship', 'lights')
+            assert_available('ship', 'lights', 'are_on')
+            assert_available('ship', 'lights', 'turn')
+            assert_available('ship', 'signal_translator')
+            assert_available('ship', 'signal_translator', 'send')
+            assert_available('ship', 'teleporter')
+            assert_available('ship', 'teleporter', 'seconds_until_ready')
+            assert_available('ship', 'teleporter', 'beam')
+            assert_available('ship', 'inverse_teleporter')
+            assert_available('ship', 'inverse_teleporter', 'seconds_until_ready')
+            assert_available('ship', 'inverse_teleporter', 'beam')
+            assert_available('ship', 'horn')
+            assert_available('ship', 'horn', 'sound')
+            assert_available('ship', 'transmit')
+            assert_available('ship', 'eject')
+        ");
+
         ApplyPluginPatch();
         Log.LogInfo($"Patches applied");
     }
