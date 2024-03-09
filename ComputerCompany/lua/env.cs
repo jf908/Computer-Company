@@ -3,14 +3,22 @@ using System.Runtime.CompilerServices;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Platforms;
 
-class CCEnv {
+class CCEnv
+{
     private Script Script;
 
-    static CCEnv() {   
+    static CCEnv()
+    {
         // Script.GlobalOptions.Platform = new LimitedPlatformAccessor();
     }
 
-    public CCEnv() {
+    public CCEnv()
+    {
+        this.Refresh();
+    }
+
+    public void Refresh()
+    {
         Script = new Script();
         Script.Globals.Set("require", DynValue.Nil); // Prevent multi-file scripts.
         Script.Globals.Set("ship", UserData.Create(new CCShip()));
@@ -18,11 +26,13 @@ class CCEnv {
         Script.Globals["print"] = (Action<DynValue>)Print;
     }
 
-    public void ExecString(string code) {
+    public void ExecString(string code)
+    {
         Script.DoString(code);
     }
 
-    private void Print(DynValue msg) {
+    private void Print(DynValue msg)
+    {
         // TODO: complete me
         Console.WriteLine(msg.ToPrintString());
     }
