@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MoonSharp.Interpreter;
 
 // game:players()          -- [string], e.g. {'kcza', 'josh'}
@@ -11,7 +12,13 @@ public class CCGame
 
     public string[] Players(string message)
     {
-        throw new System.Exception("unimplemented idc");
+        var startOfRound = StartOfRound.Instance;
+        var players = new List<string>(StartOfRound.Instance.allPlayerScripts.Length);
+        foreach (var idx in startOfRound.fullyLoadedPlayers)
+        {
+            players.Add(startOfRound.allPlayerScripts[idx].playerUsername);
+        }
+        return players.ToArray();
     }
 
     public int Day()
