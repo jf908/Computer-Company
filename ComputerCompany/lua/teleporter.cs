@@ -17,6 +17,12 @@ public class CCTeleporter
 
     public void Refresh() { }
 
+    public bool IsAvailable()
+    {
+        // TODO: complete me!
+        return true;
+    }
+
     public int SecondsUntilReady()
     {
         // TODO: complete me!

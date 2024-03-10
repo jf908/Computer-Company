@@ -5,6 +5,7 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml.Serialization;
+using MonoMod.Cil;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Platforms;
 
@@ -61,7 +62,20 @@ class CCEnv
 
     public void RunString(string code)
     {
-        Script.DoString(code);
+        try
+        {
+            var result = Script.DoString(code);
+            if (!result.IsVoid())
+            {
+                // TODO make get the last statement to return something
+                Print(result);
+            }
+        }
+        catch (Exception ex)
+        {
+            Print(DynValue.NewString(ex.ToString()));
+            Console.WriteLine(ex);
+        }
     }
 
     public DynValue Call(DynValue func, DynValue[] args)

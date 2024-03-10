@@ -5,7 +5,16 @@ using MoonSharp.Interpreter;
 [MoonSharpUserData]
 public class CCSignalTranslator
 {
-    public void Refresh() { }
+    public void Refresh()
+    {
+
+    }
+
+    public bool IsAvailable()
+    {
+        // TODO: complete me!
+        return true;
+    }
 
     public void send(string message)
     {

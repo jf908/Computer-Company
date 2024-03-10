@@ -34,11 +34,8 @@ public class TerminalOnSubmitPatch
 
             CCEnv.Instance.Refresh();
 
-            var newNode = new TerminalNode
-            {
-                displayText = "done\n\n"
-            };
-            CCEnv.Instance.Terminal.LoadNewNode(newNode);
+            CCEnv.Instance.Terminal.LoadNewNode(new TerminalNode { displayText = "done\n\n" });
+            CCEnv.Instance.Terminal.LoadNewNode(new TerminalNode { displayText = "" });
             CCEnv.Instance.Terminal.screenText.ActivateInputField();
             CCEnv.Instance.Terminal.screenText.Select();
             return false;
@@ -54,11 +51,8 @@ public class TerminalOnSubmitPatch
             string code = trimmed_input[4..];
             CCEnv.Instance.RunString(code);
 
-            var newNode = new TerminalNode
-            {
-                displayText = "done\n\n"
-            };
-            CCEnv.Instance.Terminal.LoadNewNode(newNode);
+            CCEnv.Instance.Terminal.LoadNewNode(new TerminalNode { displayText = "done\n\n" });
+            CCEnv.Instance.Terminal.LoadNewNode(new TerminalNode { displayText = "" });
             CCEnv.Instance.Terminal.screenText.ActivateInputField();
             CCEnv.Instance.Terminal.screenText.Select();
             // if (CCEnv.Instance.Terminal.forceScrollbarCoroutine != null)

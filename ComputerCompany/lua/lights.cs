@@ -1,9 +1,9 @@
+using System;
 using MonoMod.Cil;
 using MoonSharp.Interpreter;
 
 // lights:are_on()   -- () -> bool
-// lights:turn_on()  -- Guess
-// lights:turn_off() -- Guess
+// lights:turn('on'|'off')  -- Guess
 
 [MoonSharpUserData]
 public class CCLights
@@ -17,6 +17,7 @@ public class CCLights
 
     public bool are_on()
     {
+        Console.WriteLine(lights);
         if (lights == null)
         {
             return false;
@@ -26,6 +27,7 @@ public class CCLights
 
     public void turn(string state)
     {
+        Console.WriteLine(lights);
         if (lights == null)
         {
             return;

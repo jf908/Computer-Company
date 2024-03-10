@@ -16,10 +16,38 @@ public class CCShip
     public CCMonitor Monitor { get; }
     public CCTerminal Terminal { get; }
     public CCLights Lights { get; }
-    public CCSignalTranslator SignalTranslator { get; }
-    public CCTeleporter Teleporter { get; }
-    public CCTeleporter InverseTeleporter { get; }
-    public CCHorn Horn { get; }
+    private readonly CCSignalTranslator signalTranslator;
+    public CCSignalTranslator SignalTranslator
+    {
+        get
+        {
+            return signalTranslator.IsAvailable() ? signalTranslator : null;
+        }
+    }
+    private readonly CCTeleporter teleporter;
+    public CCTeleporter Teleporter
+    {
+        get
+        {
+            return teleporter.IsAvailable() ? teleporter : null;
+        }
+    }
+    private readonly CCTeleporter inverseTeleporter;
+    public CCTeleporter InverseTeleporter
+    {
+        get
+        {
+            return inverseTeleporter.IsAvailable() ? inverseTeleporter : null;
+        }
+    }
+    private readonly CCHorn horn;
+    public CCHorn Horn
+    {
+        get
+        {
+            return horn.IsAvailable() ? horn : null;
+        }
+    }
 
     public CCShip(CCTerminal terminal)
     {
@@ -27,10 +55,10 @@ public class CCShip
 
         Monitor = new CCMonitor();
         Lights = new CCLights();
-        SignalTranslator = new CCSignalTranslator();
-        Teleporter = new CCTeleporter(TeleporterKind.Normal);
-        InverseTeleporter = new CCTeleporter(TeleporterKind.Inverse);
-        Horn = new CCHorn();
+        signalTranslator = new CCSignalTranslator();
+        teleporter = new CCTeleporter(TeleporterKind.Normal);
+        inverseTeleporter = new CCTeleporter(TeleporterKind.Inverse);
+        horn = new CCHorn();
     }
 
     public void Refresh()
