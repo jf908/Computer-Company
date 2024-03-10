@@ -3,7 +3,14 @@ using MoonSharp.Interpreter;
 
 // console.commands
 [MoonSharpUserData]
-public class CCConsole
+public class CCTerminal
 {
     public CCCommands Commands { get; }
+
+    public CCTerminal(CCCommands commands)
+    {
+        Commands = commands;
+    }
+
+    public void Refresh() { }
 }

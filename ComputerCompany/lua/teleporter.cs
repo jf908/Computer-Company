@@ -6,31 +6,39 @@ using MoonSharp.Interpreter;
 // teleporter:beam() -- () -> error, where error can be 'not ready' or nil
 
 [MoonSharpUserData]
-public class CCTeleporter {
-    private TeleporterKind kind {get;}
+public class CCTeleporter
+{
+    private TeleporterKind kind { get; }
 
-    public CCTeleporter(TeleporterKind kind) {
+    public CCTeleporter(TeleporterKind kind)
+    {
         this.kind = kind;
     }
 
-    public int SecondsUntilReady() {
+    public void Refresh() { }
+
+    public int SecondsUntilReady()
+    {
         // TODO: complete me!
         return -1;
     }
 
-    public void Beam() {
-        switch (kind) {
-        case TeleporterKind.Normal:
-            // TODO: complete me!
-            break;
-        case TeleporterKind.Inverse:
-            // TODO: complete me!
-            break;
+    public void Beam()
+    {
+        switch (kind)
+        {
+            case TeleporterKind.Normal:
+                // TODO: complete me!
+                break;
+            case TeleporterKind.Inverse:
+                // TODO: complete me!
+                break;
         }
     }
 }
 
-public enum TeleporterKind {
+public enum TeleporterKind
+{
     Normal,
     Inverse
 }

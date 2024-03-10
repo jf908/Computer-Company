@@ -1,3 +1,4 @@
+using MonoMod.Cil;
 using MoonSharp.Interpreter;
 
 // lights:are_on()   -- () -> bool
@@ -5,23 +6,42 @@ using MoonSharp.Interpreter;
 // lights:turn_off() -- Guess
 
 [MoonSharpUserData]
-public class CCLights {
-    public bool are_on() {
-        // TODO: complete me!
-        return false;
+public class CCLights
+{
+    private ShipLights lights;
+
+    public void Refresh()
+    {
+        lights = StartOfRound.Instance.shipRoomLights;
     }
 
-    public void turn(string state) {
-        switch (state) {
-        case "on":
-            // TODO: complete me!
-            break;
-        case "off":
-            // TODO: complete me!  
-            break;
-        default:
-            // TODO: complete me!
-            break;
+    public bool are_on()
+    {
+        if (lights == null)
+        {
+            return false;
+        }
+        return lights.areLightsOn;
+    }
+
+    public void turn(string state)
+    {
+        if (lights == null)
+        {
+            return;
+        }
+
+        switch (state)
+        {
+            case "on":
+                lights.SetShipLightsBoolean(true);
+                break;
+            case "off":
+                lights.SetShipLightsBoolean(false);
+                break;
+            default:
+                // TODO: complete me!
+                break;
         }
     }
 }

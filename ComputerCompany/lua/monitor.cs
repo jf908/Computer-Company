@@ -12,13 +12,19 @@ using MoonSharp.Interpreter;
 // monitor:enemies_on_screen() -- [string] (where string is an enum of dot sizes? not sure here, could be nice to allow if in_danger(player) then teleport(player) end)option to disable by default! Will fail with message 'nice try, config says no' if not
 
 [MoonSharpUserData]
-public class CCMonitor {
-    public void ViewMap(string message) {
+public class CCMonitor
+{
+    public void Refresh() { }
+
+    public void ViewMap(string message)
+    {
         // TODO: implement me!
     }
-    
-    public void Turn(string state) {
-        switch (state) {
+
+    public void Turn(string state)
+    {
+        switch (state)
+        {
             case "on":
                 break;
             case "off":
@@ -29,21 +35,25 @@ public class CCMonitor {
         }
     }
 
-    public void Switch(string player) {
+    public void Switch(string player)
+    {
         // TODO: implement me!
     }
 
-    public string CurrentPlayer(string player) {
+    public string CurrentPlayer(string player)
+    {
         // TODO: implement me!
         throw new SystemException("unimplemented");
     }
 
-    public string[] PlayersOnScreen(string player) {
+    public string[] PlayersOnScreen(string player)
+    {
         // TODO: implement me!
         throw new SystemException("unimplemented");
     }
-    
-    public CCEnemyInfo[] EnemiesOnScreen(string player) {
+
+    public CCEnemyInfo[] EnemiesOnScreen(string player)
+    {
         // TODO: implement me!
         throw new SystemException("unimplemented");
     }

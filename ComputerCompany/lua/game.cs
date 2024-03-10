@@ -5,28 +5,37 @@ using MoonSharp.Interpreter;
 // game:next_company_day() -- integer,  e.g. 12
 
 [MoonSharpUserData]
-public class CCGame {
-    public string[] Players(string message) {
+public class CCGame
+{
+    public void Refresh() { }
+
+    public string[] Players(string message)
+    {
         throw new System.Exception("unimplemented idc");
     }
 
-    public int Day() {
+    public int Day()
+    {
         throw new System.Exception("unimplemented idc");
     }
 
-    public int NextCompanyDay() {
+    public int NextCompanyDay()
+    {
         throw new System.Exception("unimplemented idc");
     }
 
-    public int QuotaAmount() {
+    public int QuotaAmount()
+    {
         throw new System.Exception("unimplemented idc");
     }
 
-    public int QuotaFulfilledAmount() {
+    public int QuotaFulfilledAmount()
+    {
         throw new System.Exception("unimplemented idc");
     }
 
-    public int Funds() {
+    public int Funds()
+    {
         throw new System.Exception("unimplemented idc");
     }
 }

@@ -1,39 +1,95 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Net;
 using System.Runtime.CompilerServices;
+using System.Text;
+using System.Xml.Serialization;
 using MoonSharp.Interpreter;
 using MoonSharp.Interpreter.Platforms;
 
 class CCEnv
 {
-    private Script Script;
+    public static CCEnv Instance;
+
+    // public Dictionary<string, DynValue> ScriptCommands;
+    public Dictionary<string, DynValue> ScriptCommands;
+
+    private CCGame game;
+    private CCShip ship;
 
     static CCEnv()
     {
+        Instance = new CCEnv();
         // Script.GlobalOptions.Platform = new LimitedPlatformAccessor();
     }
 
+    private Script Script;
+
+    public Terminal Terminal { get; set; }
+
     public CCEnv()
     {
-        this.Refresh();
+        ScriptCommands = new Dictionary<string, DynValue>();
+
+        var commands = new CCCommands(ScriptCommands);
+        var terminal = new CCTerminal(commands);
+        ship = new CCShip(terminal);
+
+        game = new CCGame();
+
+        RefreshScript();
     }
 
     public void Refresh()
     {
-        Script = new Script();
-        Script.Globals.Set("require", DynValue.Nil); // Prevent multi-file scripts.
-        Script.Globals.Set("ship", UserData.Create(new CCShip()));
-        Script.Globals.Set("game", UserData.Create(new CCGame()));
-        Script.Globals["print"] = (Action<DynValue>)Print;
+        game.Refresh();
+        ship.Refresh();
+        ScriptCommands.Clear();
+
+        RefreshScript();
     }
 
-    public void ExecString(string code)
+    private void RefreshScript()
+    {
+        Script = new Script();
+        Script.Globals.Set("require", DynValue.Nil); // Prevent multi-file scripts.
+        Script.Globals.Set("ship", UserData.Create(ship));
+        Script.Globals.Set("game", UserData.Create(game));
+        Script.Globals["print"] = Print;
+    }
+
+    public void RunString(string code)
     {
         Script.DoString(code);
     }
 
-    private void Print(DynValue msg)
+    public DynValue Call(DynValue func, DynValue[] args)
     {
-        // TODO: complete me
-        Console.WriteLine(msg.ToPrintString());
+        return Script.Call(func, args);
+    }
+
+    public DynValue MakeDynValue(object obj)
+    {
+        return DynValue.FromObject(Script, obj);
+    }
+
+    private void Print(params DynValue[] args)
+    {
+        var newText = new StringBuilder();
+        foreach (var arg in args)
+        {
+            newText.Append(arg.ToPrintString());
+        }
+
+        if (Terminal != null)
+        {
+            newText.Append('\n');
+            Terminal.screenText.text += newText.ToString();
+        }
+        else
+        {
+            Console.WriteLine(newText.ToString());
+        }
     }
 }

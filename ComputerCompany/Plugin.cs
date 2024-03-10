@@ -34,13 +34,13 @@ public class Plugin : BaseUnityPlugin
         Log.LogInfo($"Applying patches...");
 
         var env = new CCEnv();
-        env.ExecString(@"
+        env.RunString(@"
             function assert_available(...)
                 local path = {...}
+                print('Checking availability of ' .. table.concat(path, '.'))
                 local current = _G
                 for i = 1, select('#', ...) do
                     local part = select(i, ...)
-                    print(part)
                     local nxt = current[part]
                     if not nxt then
                         error('could not find path part ' .. part .. ' in ' .. table.concat(path, '.'))
@@ -64,8 +64,8 @@ public class Plugin : BaseUnityPlugin
             assert_available('ship', 'monitor', 'current_player')
             assert_available('ship', 'monitor', 'players_on_screen')
             assert_available('ship', 'monitor', 'enemies_on_screen')
-            assert_available('ship', 'console')
-            -- This doesn't yet work? assert_available('ship', 'console', 'commands')
+            assert_available('ship', 'terminal')
+            assert_available('ship', 'terminal', 'commands')
             assert_available('ship', 'lights')
             assert_available('ship', 'lights', 'are_on')
             assert_available('ship', 'lights', 'turn')
@@ -94,5 +94,7 @@ public class Plugin : BaseUnityPlugin
     {
         _harmony.PatchAll(typeof(ShipLightsPatch));
         _harmony.PatchAll(typeof(PlayerControllerBPatch));
+        _harmony.PatchAll(typeof(TerminalOnSubmitPatch));
+        _harmony.PatchAll(typeof(TerminalAwakePatch));
     }
 }
