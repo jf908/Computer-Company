@@ -12,8 +12,7 @@ public class CCSignalTranslator
 
     public bool IsAvailable()
     {
-        // TODO: complete me!
-        return true;
+        return Object.FindObjectOfType<SignalTranslator>() != null;
     }
 
     public void send(string message)
