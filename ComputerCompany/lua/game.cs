@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MoonSharp.Interpreter;
+using UnityEngine;
 
 // game:players()          -- [string], e.g. {'kcza', 'josh'}
 // game:day()              -- integer,  e.g. 10
@@ -23,26 +24,26 @@ public class CCGame
 
     public int Day()
     {
-        throw new System.Exception("unimplemented idc");
+        return StartOfRound.Instance.gameStats.daysSpent;
     }
 
     public int NextCompanyDay()
     {
-        throw new System.Exception("unimplemented idc");
+        return TimeOfDay.Instance.daysUntilDeadline;
     }
 
     public int QuotaAmount()
     {
-        throw new System.Exception("unimplemented idc");
+        return TimeOfDay.Instance.profitQuota;
     }
 
     public int QuotaFulfilledAmount()
     {
-        throw new System.Exception("unimplemented idc");
+        return TimeOfDay.Instance.quotaFulfilled;
     }
 
     public int Funds()
     {
-        throw new System.Exception("unimplemented idc");
+        return Object.FindObjectOfType<Terminal>().groupCredits;
     }
 }
