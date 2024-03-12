@@ -41,14 +41,14 @@ public class TerminalOnSubmitPatch
             return false;
         }
 
-        if (trimmed_input.StartsWith("run ", true, CultureInfo.InvariantCulture))
+        if (trimmed_input.StartsWith('$'))
         {
             CCEnv.Instance.Terminal.modifyingText = true;
             CCEnv.Instance.Terminal.screenText.text = CCEnv.Instance.Terminal.screenText.text.Substring(0, CCEnv.Instance.Terminal.screenText.text.Length - CCEnv.Instance.Terminal.textAdded);
             CCEnv.Instance.Terminal.currentText = CCEnv.Instance.Terminal.screenText.text;
             CCEnv.Instance.Terminal.textAdded = 0;
 
-            string code = trimmed_input[4..];
+            string code = trimmed_input[1..];
             CCEnv.Instance.RunString(code);
 
             CCEnv.Instance.Terminal.LoadNewNode(new TerminalNode { displayText = "done\n\n" });
