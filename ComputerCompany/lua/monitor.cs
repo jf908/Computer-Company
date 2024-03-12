@@ -18,7 +18,9 @@ public class CCMonitor
 
     public void ViewMap(string message)
     {
-        // TODO: implement me!
+        // TODO: fix me!
+        // var startOfRound = StartOfRound.Instance;
+        // startOfRound.SetMapScreenInfoToCurrentLevel();
     }
 
     public void Turn(string state)

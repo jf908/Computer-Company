@@ -51,10 +51,9 @@ public class Plugin : BaseUnityPlugin
 
             assert_available('game')
             assert_available('game', 'players')
-            assert_available('game', 'day')
-            assert_available('game', 'next_company_day')
-            assert_available('game', 'quota_amount')
-            assert_available('game', 'quota_fulfilled_amount')
+            assert_available('game', 'deadline_days')
+            assert_available('game', 'quota')
+            assert_available('game', 'quota_fulfilled')
             assert_available('game', 'funds')
             assert_available('ship')
             assert_available('ship', 'monitor')

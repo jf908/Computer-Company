@@ -21,28 +21,29 @@ public class CCGame
         return players.ToArray();
     }
 
-    public int Day()
+    public int CurrentHour()
     {
-        throw new System.Exception("unimplemented idc");
+        return TimeOfDay.Instance.hour + 6;
     }
 
-    public int NextCompanyDay()
+    public int DeadlineDays()
     {
-        throw new System.Exception("unimplemented idc");
+        return TimeOfDay.Instance.daysUntilDeadline;
     }
 
-    public int QuotaAmount()
+    public int Quota()
     {
-        throw new System.Exception("unimplemented idc");
+        return TimeOfDay.Instance.profitQuota;
     }
 
-    public int QuotaFulfilledAmount()
+    public int Earned()
     {
-        throw new System.Exception("unimplemented idc");
+        return TimeOfDay.Instance.quotaFulfilled;
     }
 
     public int Funds()
     {
+        // TODO: complete me!
         throw new System.Exception("unimplemented idc");
     }
 }
