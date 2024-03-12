@@ -57,7 +57,7 @@ class CCEnv
         Script.Globals.Set("require", DynValue.Nil); // Prevent multi-file scripts.
         Script.Globals.Set("ship", UserData.Create(ship));
         Script.Globals.Set("game", UserData.Create(game));
-        Script.Globals["print"] = Print;
+        Script.Options.DebugPrint = Print;
     }
 
     public void RunString(string code)
@@ -68,12 +68,12 @@ class CCEnv
             if (!result.IsVoid())
             {
                 // TODO make get the last statement to return something
-                Print(result);
+                Print(result.ToPrintString());
             }
         }
         catch (Exception ex)
         {
-            Print(DynValue.NewString(ex.ToString()));
+            Print(ex.ToString());
             Console.WriteLine(ex);
         }
     }
@@ -88,22 +88,15 @@ class CCEnv
         return DynValue.FromObject(Script, obj);
     }
 
-    private void Print(params DynValue[] args)
+    private void Print(string msg)
     {
-        var newText = new StringBuilder();
-        foreach (var arg in args)
-        {
-            newText.Append(arg.ToPrintString());
-        }
-
         if (Terminal != null)
         {
-            newText.Append('\n');
-            Terminal.screenText.text += newText.ToString();
+            Terminal.screenText.text += msg;
         }
         else
         {
-            Console.WriteLine(newText.ToString());
+            Console.WriteLine(msg);
         }
     }
 }
