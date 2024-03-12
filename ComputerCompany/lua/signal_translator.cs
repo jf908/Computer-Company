@@ -13,7 +13,7 @@ public class CCSignalTranslator
         return Object.FindObjectOfType<SignalTranslator>() != null;
     }
 
-    public void send(string message)
+    public void Send(string message)
     {
         // TODO: complete me!
     }
