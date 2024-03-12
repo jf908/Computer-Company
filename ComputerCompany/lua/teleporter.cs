@@ -19,8 +19,15 @@ public class CCTeleporter
 
     public bool IsAvailable()
     {
-        // TODO: complete me!
-        return true;
+        switch (kind)
+        {
+            case TeleporterKind.Normal:
+                return ShipTeleporter.hasBeenSpawnedThisSession;
+            case TeleporterKind.Inverse:
+                return ShipTeleporter.hasBeenSpawnedThisSessionInverse;
+            default:
+                return false;
+        }
     }
 
     public int SecondsUntilReady()

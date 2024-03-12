@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MoonSharp.Interpreter;
+using UnityEngine;
 
 // game:players()          -- [string], e.g. {'kcza', 'josh'}
 // game:day()              -- integer,  e.g. 10
@@ -19,6 +20,11 @@ public class CCGame
             players.Add(startOfRound.allPlayerScripts[idx].playerUsername);
         }
         return players.ToArray();
+    }
+
+    public int CurrentDay()
+    {
+        return StartOfRound.Instance.gameStats.daysSpent;
     }
 
     public int CurrentHour()
@@ -43,7 +49,6 @@ public class CCGame
 
     public int Funds()
     {
-        // TODO: complete me!
-        throw new System.Exception("unimplemented idc");
+        return Object.FindObjectOfType<Terminal>().groupCredits;
     }
 }
