@@ -15,7 +15,7 @@ public class CCLights
         lights = StartOfRound.Instance.shipRoomLights;
     }
 
-    public bool are_on()
+    public bool AreOn()
     {
         Console.WriteLine(lights);
         if (lights == null)
@@ -25,7 +25,7 @@ public class CCLights
         return lights.areLightsOn;
     }
 
-    public void turn(string state)
+    public void Turn(string state)
     {
         Console.WriteLine(lights);
         if (lights == null)

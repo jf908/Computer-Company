@@ -73,16 +73,16 @@ public class Plugin : BaseUnityPlugin
             assert_available('ship', 'lights')
             assert_available('ship', 'lights', 'are_on')
             assert_available('ship', 'lights', 'turn')
-            assert_available('ship', 'signal_translator')
-            assert_available('ship', 'signal_translator', 'send')
-            assert_available('ship', 'teleporter')
-            assert_available('ship', 'teleporter', 'seconds_until_ready')
-            assert_available('ship', 'teleporter', 'beam')
-            assert_available('ship', 'inverse_teleporter')
-            assert_available('ship', 'inverse_teleporter', 'seconds_until_ready')
-            assert_available('ship', 'inverse_teleporter', 'beam')
-            assert_available('ship', 'horn')
-            assert_available('ship', 'horn', 'sound')
+            -- assert_available('ship', 'signal_translator')
+            -- assert_available('ship', 'signal_translator', 'send')
+            -- assert_available('ship', 'teleporter')
+            -- assert_available('ship', 'teleporter', 'seconds_until_ready')
+            -- assert_available('ship', 'teleporter', 'beam')
+            -- assert_available('ship', 'inverse_teleporter')
+            -- assert_available('ship', 'inverse_teleporter', 'seconds_until_ready')
+            -- assert_available('ship', 'inverse_teleporter', 'beam')
+            -- assert_available('ship', 'horn')
+            -- assert_available('ship', 'horn', 'sound')
             assert_available('ship', 'transmit')
             assert_available('ship', 'eject')
         ");
@@ -96,8 +96,6 @@ public class Plugin : BaseUnityPlugin
     /// </summary>
     private void ApplyPluginPatch()
     {
-        _harmony.PatchAll(typeof(ShipLightsPatch));
-        _harmony.PatchAll(typeof(PlayerControllerBPatch));
         _harmony.PatchAll(typeof(TerminalOnSubmitPatch));
         _harmony.PatchAll(typeof(TerminalAwakePatch));
     }

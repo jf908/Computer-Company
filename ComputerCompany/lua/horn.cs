@@ -1,7 +1,6 @@
-using System;
-using System.Net.WebSockets;
 using System.Threading;
 using MoonSharp.Interpreter;
+using UnityEngine;
 
 // horn:sound(millis) -- (number) -> ()
 
@@ -12,20 +11,14 @@ public class CCHorn
 
     public void Refresh()
     {
-        // StartOfRound.Instance.SpawnedShipUnlockables
-        foreach (var u in StartOfRound.Instance.unlockablesList.unlockables)
-        {
-            Console.WriteLine(u);
-        }
     }
 
     public bool IsAvailable()
     {
-        // TODO: complete me!
-        return true;
+        return Object.FindObjectOfType<ShipAlarmCord>() != null;
     }
 
-    public void sound(double seconds)
+    public void Sound(double seconds)
     {
         // TODO: Complete me!
         cord.HoldCordDown();

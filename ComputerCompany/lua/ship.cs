@@ -66,20 +66,23 @@ public class CCShip
         Terminal.Refresh();
         Monitor.Refresh();
         Lights.Refresh();
-        SignalTranslator.Refresh();
-        Teleporter.Refresh();
-        InverseTeleporter.Refresh();
-        Horn.Refresh();
+        signalTranslator.Refresh();
+        teleporter.Refresh();
+        inverseTeleporter.Refresh();
+        horn.Refresh();
     }
 
-    public void Transmit(string message)
-    {
-        // TODO: implement me!
-    }
+    // public void Transmit(string message)
+    // {
+    //     // TODO: implement me!
+    // }
 
     public void Eject(string message)
     {
         // TODO: implement me!
-        // TODO: check whether host allows this?
+        // if (base.IsServer && !StartOfRound.Instance.isChallengeFile && StartOfRound.Instance.inShipPhase && !StartOfRound.Instance.firingPlayersCutsceneRunning)
+        // {
+        //     StartOfRound.Instance.ManuallyEjectPlayersServerRpc();
+        // }
     }
 }

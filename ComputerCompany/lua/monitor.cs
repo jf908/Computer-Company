@@ -1,7 +1,7 @@
-using System;
 using System.Threading;
 using System.Xml.Serialization;
 using MoonSharp.Interpreter;
+using UnityEngine;
 
 // monitor:view()              -- Toggle the console monitor underlay (i.e. run `view monitor`)
 // monitor:turn_off()
@@ -16,11 +16,13 @@ public class CCMonitor
 {
     public void Refresh() { }
 
-    public void ViewMap(string message)
+    public void ViewMap()
     {
         // TODO: fix me!
         // var startOfRound = StartOfRound.Instance;
         // startOfRound.SetMapScreenInfoToCurrentLevel();
+        // StartOfRound.Instance.SwitchMapMonitorPurpose(false);
+        // StartOfRound.Instance.SwitchMapMonitorPurpose(false);
     }
 
     public void Turn(string state)
@@ -32,31 +34,35 @@ public class CCMonitor
             case "off":
                 break;
             default:
-                // TODO: wtf
-                break;
+                throw new System.Exception("argument must be 'on' or 'off'");
         }
     }
 
     public void Switch(string player)
     {
-        // TODO: implement me!
+        var terminal = Object.FindObjectOfType<Terminal>();
+        int num = terminal.CheckForPlayerNameCommand("switch", player);
+        if (num != -1)
+        {
+            StartOfRound.Instance.mapScreen.SwitchRadarTargetAndSync(num);
+        }
     }
 
-    public string CurrentPlayer(string player)
+    public string CurrentPlayer()
     {
-        // TODO: implement me!
-        throw new SystemException("unimplemented");
+        // TODO: test me!
+        return StartOfRound.Instance.mapScreen.radarTargets[StartOfRound.Instance.mapScreen.targetTransformIndex].name;
     }
 
-    public string[] PlayersOnScreen(string player)
+    public string[] PlayersOnScreen()
     {
         // TODO: implement me!
-        throw new SystemException("unimplemented");
+        throw new System.Exception("unimplemented");
     }
 
-    public CCEnemyInfo[] EnemiesOnScreen(string player)
+    public CCEnemyInfo[] EnemiesOnScreen()
     {
         // TODO: implement me!
-        throw new SystemException("unimplemented");
+        throw new System.Exception("unimplemented");
     }
 }

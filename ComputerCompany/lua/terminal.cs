@@ -12,5 +12,10 @@ public class CCTerminal
         Commands = commands;
     }
 
+    // public void Exec(string command)
+    // {
+    //     // TODO: complete me!
+    // }
+
     public void Refresh() { }
 }
