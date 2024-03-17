@@ -1,4 +1,4 @@
-﻿using BepInEx;
+using BepInEx;
 using BepInEx.Logging;
 using HarmonyLib;
 using DistractedCompany.patch;
@@ -16,11 +16,14 @@ public class Plugin : BaseUnityPlugin
 
     private readonly Harmony _harmony = new(PluginInfo.PLUGIN_GUID);
 
+    public readonly FileLoader loader;
+
     public TemplateService Service;
 
     public Plugin()
     {
         Instance = this;
+        loader = new();
     }
 
     private void Awake()
@@ -98,4 +101,7 @@ public class Plugin : BaseUnityPlugin
         _harmony.PatchAll(typeof(TerminalOnSubmitPatch));
         _harmony.PatchAll(typeof(TerminalAwakePatch));
     }
+
+    // https://learn.microsoft.com/en-us/dotnet/standard/garbage-collection/implementing-dispose#cascade-dispose-calls
+    public void Dispose() => loader.Dispose();
 }
